@@ -8,14 +8,16 @@ import { ProductNewComponent } from './components/product-new/product-new.compon
 
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/about/signup/signup.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path:'new', component: ProductNewComponent },
-  { path:'about', component: AboutComponent },
-  { path:'products', component: ProductsComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent},
+  { path: 'new', component: ProductNewComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: '**', redirectTo: '' }
 ];
 

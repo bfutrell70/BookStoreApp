@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-product-card',
@@ -10,6 +12,8 @@ export class ProductCardComponent {
   @Input() product: any;
   @Output() orderProduct = new EventEmitter<any>();
   @Output() removeProduct = new EventEmitter<number>();
+
+  constructor(public userService: UserService, public router: Router) {}
 
   orderProductClick() {
     this.orderProduct.emit(this.product);
@@ -40,5 +44,7 @@ export class ProductCardComponent {
     }
   }
   
-
+  showDetails(id: number) {
+    this.router.navigate([`products/${id}`]);
+  }
 }
