@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { hide, show } from 'src/app/ngrx-state/actions/home.actions';
 
 @Component({
   selector: 'app-home',
@@ -7,17 +10,33 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  showMore: boolean = false;
+  // isShowMore: boolean = false;
   showMoreButtonText: string = "Show more...";
 
-  toggleShowMore(): void {
-    this.showMore = !this.showMore;
+  show$: Observable<boolean> = new Observable();
 
-    if (this.showMore) {
-      this.showMoreButtonText = "Show less...";
-    }
-    else {
-      this.showMoreButtonText = "Show more...";
-    }
+  constructor(private store: Store<{home: false}>) {
+    this.show$ = this.store.select('home');
   }
+
+  // toggleShowMore(): void {
+  //   this.showMore = !this.showMore;
+
+  //   if (this.showMore) {
+  //     this.showMoreButtonText = "Show less...";
+  //   }
+  //   else {
+  //     this.showMoreButtonText = "Show more...";
+  //   }
+  // }
+
+  showMore(): void {
+    this.store.dispatch(show());
+  }
+
+  showLess(): void {
+    this.store.dispatch(hide());
+  }
+
+
 }
