@@ -18,6 +18,9 @@ import { SignupComponent } from './components/about/signup/signup.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { homeReducer } from './ngrx-state/reducers/home.reducers';
+import { productReducer } from './ngrx-state/reducers/product.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductEffects } from './ngrx-state/effects/product.effects';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { homeReducer } from './ngrx-state/reducers/home.reducers';
     AppRoutingModule,
     FormsModule,
 
-    StoreModule.forRoot({home: homeReducer})
+    StoreModule.forRoot({home: homeReducer, products: productReducer}),
+    EffectsModule.forRoot([ProductEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
