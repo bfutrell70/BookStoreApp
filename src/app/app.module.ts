@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
+import { MetaReducer, StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,9 @@ import { homeReducer } from './ngrx-state/reducers/home.reducers';
 import { productReducer } from './ngrx-state/reducers/product.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from './ngrx-state/effects/product.effects';
+import { logger } from './ngrx-state/logger.meta-reducer';
+
+export const metaReducers: MetaReducer<any>[] = [logger];
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { ProductEffects } from './ngrx-state/effects/product.effects';
     AppRoutingModule,
     FormsModule,
 
-    StoreModule.forRoot({home: homeReducer, products: productReducer}),
+    StoreModule.forRoot(
+      {home: homeReducer, products: productReducer},
+      {metaReducers}
+    ),
     EffectsModule.forRoot([ProductEffects])
   ],
   providers: [],
