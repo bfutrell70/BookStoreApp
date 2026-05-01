@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { hide, show } from 'src/app/ngrx-state/actions/home.actions';
@@ -11,19 +11,32 @@ import { Hide, Show } from 'src/app/state-ngxs/actions/home.actions';
 })
 export class HomeComponent {
 
-  // isShowMore: boolean = false;
-  isShowMore$ = this.store.select(state => state.home);
-
-  constructor(private store: Store) {
-  }
+  isShowMore: boolean = false;
+  isShowMoreWithSignal = signal<boolean>(false);
 
   showMore(): void {
-    this.store.dispatch(new Show());
+    //this.isShowMore = true;
+    this.isShowMoreWithSignal.set(true);
   }
 
   showLess(): void {
-    this.store.dispatch(new Hide());
+    //this.isShowMore = false;
+    this.isShowMoreWithSignal.set(false);
   }
+
+  // ----- NGXS store code
+  // isShowMore$ = this.store.select(state => state.home);
+
+  // constructor(private store: Store) {
+  // }
+
+  // showMore(): void {
+  //   this.store.dispatch(new Show());
+  // }
+
+  // showLess(): void {
+  //   this.store.dispatch(new Hide());
+  // }
 }
 
 // ---- original code using @ngrx/store ----
