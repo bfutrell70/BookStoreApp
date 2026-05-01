@@ -25,6 +25,7 @@ import { logger } from './ngrx-state/logger.meta-reducer';
 import { NgxsModule } from '@ngxs/store';
 import { HomeState } from './state-ngxs/state/home.state';
 import { ProductState } from './state-ngxs/state/product.state';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 export const metaReducers: MetaReducer<any>[] = [logger];
 
@@ -49,6 +50,7 @@ export const metaReducers: MetaReducer<any>[] = [logger];
     FormsModule,
 
     NgxsModule.forRoot([HomeState, ProductState]),
+    NgxsLoggerPluginModule.forRoot(),
 
     StoreModule.forRoot(
       {home: homeReducer, products: productReducer},
