@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
 import * as ProductActions from '../../ngrx-state/actions/product.actions';
 import { LoadProducts } from 'src/app/state-ngxs/actions/product.actions';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -12,18 +13,17 @@ import { LoadProducts } from 'src/app/state-ngxs/actions/product.actions';
 })
 export class ProductsComponent {
 
-  //products: any[] = [];
-  products$: Observable<any>;
   product: any;
 
   constructor(
-    private store: Store,
-    private router: Router) {
-      this.products$ = this.store.select(state => state.products.products);
+    private router: Router,
+    public productService: ProductService) {
+      //this.products$ = this.store.select(state => state.products.products);
     }
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadProducts());
+    //this.store.dispatch(new LoadProducts());
+    this.productService.getProducts();
   }
   
   orderProductNow(product: any) {

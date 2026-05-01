@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
@@ -7,11 +7,20 @@ import { Observable, map } from 'rxjs';
 })
 export class ProductService {
   private _baseUrl = 'https://fakestoreapi.com'
+  allProducts = signal<any[]>([]);
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<any> {
-    return this.http.get<any>(`${this._baseUrl}/products`);
+  getProducts() {
+    this.http.get<any[]>(`${this._baseUrl}/products`)
+      .subscribe(
+        response => {
+          this.allProducts.set(response)
+        },
+        error => {
+          console.log('getProductsError:', error)
+        }
+    );
   }
 
   getProductById(id: number): Observable<any> {

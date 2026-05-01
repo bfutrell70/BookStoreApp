@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-3" *ngFor="let product of products$ | async">
+        <div class="col-md-3" *ngFor="let product of productService.allProducts()">
             <app-product-card [product]="product" (orderProduct)="orderProductNow($event)"
                 (removeProduct)="removeProductNow($event)"></app-product-card>
         </div>
