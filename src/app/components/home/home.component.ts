@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { hide, show } from 'src/app/ngrx-state/actions/home.actions';
@@ -11,12 +11,17 @@ import { Hide, Show } from 'src/app/state-ngxs/actions/home.actions';
 })
 export class HomeComponent {
 
-  isShowMore: boolean = false;
+  //isShowMore: boolean = false;
   isShowMoreWithSignal = signal<boolean>(false);
+  clickCount = signal(0);
+  clickCountComputed = computed(() => this.clickCount() * 2);
 
   showMore(): void {
     //this.isShowMore = true;
     this.isShowMoreWithSignal.set(true);
+
+    // updating value by one by using value++ didn't work
+    this.clickCount.update((value) => value + 1);
   }
 
   showLess(): void {
