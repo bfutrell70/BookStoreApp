@@ -22,6 +22,8 @@ import { productReducer } from './ngrx-state/reducers/product.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from './ngrx-state/effects/product.effects';
 import { logger } from './ngrx-state/logger.meta-reducer';
+import { NgxsModule } from '@ngxs/store';
+import { HomeState } from './state-ngxs/state/home.state';
 
 export const metaReducers: MetaReducer<any>[] = [logger];
 
@@ -44,6 +46,8 @@ export const metaReducers: MetaReducer<any>[] = [logger];
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+
+    NgxsModule.forRoot([HomeState]),
 
     StoreModule.forRoot(
       {home: homeReducer, products: productReducer},

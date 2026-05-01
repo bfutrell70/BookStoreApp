@@ -15,6 +15,8 @@ export class HomeComponent {
 
   show$: Observable<boolean> = new Observable();
 
+
+  
   constructor(private store: Store<{home: false}>) {
     this.show$ = this.store.select('home');
   }
